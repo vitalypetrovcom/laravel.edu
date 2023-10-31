@@ -2,14 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>About</title>
+    <title>Show</title>
 </head>
 <body>
 
 
-<h1> About </h1>
+<h1> {{ $slug }} Page </h1>
 
 
 
 </body>
 </html>
+
