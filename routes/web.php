@@ -198,4 +198,35 @@ Route::get ('/test', 'App\Http\Controllers\HomeController@test');
 Route::get ('/page/{slug}', 'App\Http\Controllers\PageController@show'); // Если мы хотим чтобы после page/ у нас названия страниц подставлялись динамически, тогда мы можем использовать переменную {slug} и независимо от того, что к нам придет в качестве slug, мы всегда будем обращаться к методу show PageController, где уже будем пытаться достать из БД контент соответствующей страницы и подключить соответствующий вид. Вид мы можем подключать каждый в отдельности (view ("pages.$slug");)
 Route::get ('/test2', 'App\Http\Controllers\Test\TestController@index');
 
+Route::resource ('/posts', 'App\Http\Controllers\PostController'); // Маршрутизация для списка постов с использованием метода resource для контроллера ресурсов PostController*/
+/*Route::resource ('/posts', 'App\Http\Controllers\PostController', ['parameters' => [
+    'posts' => 'slug',
+]]);*/ // Маршрутизация для списка постов с использованием метода resource для контроллера ресурсов PostController. Для того чтобы нам для проверки правильности указания id | slug в строке запроса пользователя после /posts/, мы в метод resource передаем массив с параметрами (ключом будет 'parameters'), значением будет массив, где мы указываем имя ресурса 'posts' и как он на самом деле должен называться 'id' (мы хотим, чтобы он так назывался). Теперь, 'posts' будет называться именно 'id' и будет доступен по тем правилам, которые у нас описаны в RouteServiceProvider.php для данного аргумента (pattern ('id', '[0-9]+')). Если нам нужно будет, чтобы к имени ресурса 'posts' применялись правила для slug - мы в параметрах назовем его 'posts' => 'slug'. В таком случае при выводе в вид в файле index.blade.php и edit.blade.php при указании маршрутов мы тоже должны поменять 'post' на 'slug'
+Route::resource ('/admin/posts', 'App\Http\Controllers\PostController', ['parameters' => [
+    'posts' => 'slug',
+]]); // Если нужно сделать это для админки - мы добавляем в имя ресурса /admin/posts'. Весь остальной код остается прежним (его менять не нужно)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
