@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 
@@ -25,5 +26,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+        /*DB::listen ( function ( $query ) {
+
+            dump ($query->sql, $query->bindings); // Распечатаем наш запрос sql и привязки bindings
+
+        });*/ // Listening For Query Events - Мы можем отслеживать SQL запросы и "привязки". На вход передаем коллбекфункцию параметром которой будет $query (те наш запрос)
     }
 }
