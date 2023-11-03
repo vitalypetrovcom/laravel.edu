@@ -2,8 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+
+/**
+ * @mixin Builder // Используем примесь @mixin и подмешиваем сюда класс Builder - нам будут доступны в этой модели все методы
+ */
 
 class Post extends Model
 {
@@ -24,6 +29,10 @@ class Post extends Model
             'content' => 'Lorem ipsum...', // Чтобы в поле 'content' у нас записывалась строка 'Lorem ipsum'
 
         ];
+
+        protected $fillable = ['title', 'content']; // "Белый список полей таблицы - разрешенные поля для массового присвоения". В файле HomeController.php - Для того, чтобы данный метод работал корректно, нам нужно добавить ключ 'title' в "белый список полей" (массив fillable), разрешенных для массового заполнения таким способом
+
+//        protected $guarded = []; // "Черный список полей таблицы - запрещенные поля для массового присвоения". Если мы хотим разрешить все поля для массового заполнения - мы должны записать в свойство $guarded пустой массив []
 
 
 
