@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+
+/** @mixin Builder */
 
 class Rubric extends Model
 {
@@ -26,7 +29,7 @@ class Rubric extends Model
     public function posts () { // Метод для создания связи "Один ко Многим" в модели Rubric - прямой связи - если мы захотим по названию рубрики получить название нескольких постов, которые с ней связаны
 
         // 1 вариант указания - в виде строки 'App\Models\Post'
-//        return $this->hasMany ( 'App\Models\Post');
+        return $this->hasMany ( 'App\Models\Post');
 
         // -->> Если, например, вместо названия по стандартам Ларавель rubric_id в таблице posts, мы назвали бы поле rubric_my_id? в этом случае для корректной работы кода, мы будем должны сделать возврат следующим образом, добавляя указание, что внешний ключ называется 'rubric_my_id':
         /*return $this->hasMany ( 'App\Models\Post', 'rubric_my_id');*/
