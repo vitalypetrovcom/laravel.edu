@@ -1,15 +1,8 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>About</title>
-</head>
-<body>
+@extends('layouts.layout')
 
-
-<h1> About Page </h1>
-
-
-
-</body>
-</html>
+@section('content')
+    <div class="container">
+        <br>
+        <h1>About Page</h1>
+    </div>
+@endsection

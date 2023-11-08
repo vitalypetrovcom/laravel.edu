@@ -176,7 +176,7 @@ class HomeController extends Controller { // Контроллер (класс) �
 
 
 
-    public function index () {
+    /*public function index () {*/
         // Как нам записать что-то в модель (в таблицу posts)?
         /*$post = new Post(); */// Создаем объект нашей модели и заполняем его данными
        /* $post->title = 'Статья 2';*/
@@ -304,6 +304,10 @@ class HomeController extends Controller { // Контроллер (класс) �
             dump ($post->title);
         }*/
 
+      /*  return view ('home');
+    }*/
+
+    public function index () {
 
 
 
@@ -312,13 +316,12 @@ class HomeController extends Controller { // Контроллер (класс) �
 
 
 
-        return view ('home');
+
+
+
+        return view ('home', []);
+
     }
-
-
-
-
-
 
 
 
