@@ -309,6 +309,8 @@ class HomeController extends Controller { // Контроллер (класс) �
 
     public function index () {
 
+        $title = 'Home Page';
+        $h1 = '<h1>home page</h1>';
 
 
 
@@ -319,7 +321,9 @@ class HomeController extends Controller { // Контроллер (класс) �
 
 
 
-        return view ('home', []);
+
+
+        return view ('home', compact ('title', 'h1'));
 
     }
 
