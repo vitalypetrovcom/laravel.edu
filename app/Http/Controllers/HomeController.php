@@ -310,26 +310,13 @@ class HomeController extends Controller { // Контроллер (класс) �
     public function index () {
 
         $title = 'Home Page';
-        $h1 = '<h1>home page</h1>';
-        $data1 = range(1, 20);
-        $data2 = [
-            'title' => 'Title',
-            'content' => 'Content',
-            'keys' => 'Keywords',
-        ];
+        $posts = Post::orderBy('id', 'DESC')->get (); // Получаем все посты из таблицы posts БД, отсортированные по полю 'id' в обратном порядке 'DESC'
 
 
 
 
 
-
-
-
-
-
-
-
-        return view ('home', compact ('title', 'h1', 'data1', 'data2'));
+        return view ('home', compact ('title', 'posts'));
 
     }
 

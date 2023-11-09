@@ -2,11 +2,15 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
 /**
+ * class Post
+ * @package App
  * @mixin Builder // Используем примесь @mixin и подмешиваем сюда класс Builder - нам будут доступны в этой модели все методы
  */
 
@@ -55,6 +59,21 @@ class Post extends Model
     public function tags () {
 
         return $this->belongsToMany (Tag::class); // Используем метод belongsToMany для модели "Многие ко многим" и передаем на вход Tag::class (мы связываем здесь модель Tag с моделью Post)
+
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function getPostDate () { // Метод для вывода в постах даты и времени в нужном для нас формате
+
+        return Carbon::parse ($this->created_at)->diffForHumans (); // Для этого используем дополнение Ларавель Carbon метод parse, передаем как свойство аргументом дату и время создания поста created_at и затем используем метод diffForHumans для человеческого вывода даты и времени поста
+        // Для подобных целей в PHP используется Класс IntlDateFormatter. Это класс позволяющий форматировать/разбирать даты в соответствии с настройками локали, используя строковые и/или библиотечные шаблоны.
+
+        /* Вывод даты в формате 9 нояб. 2023 */
+        /*$formatter = new \IntlDateFormatter('ru_RU', \IntlDateFormatter::FULL, \IntlDateFormatter::FULL);
+        $formatter->setPattern('d MMM y');
+        return $formatter->format(new \DateTime($this->created_at));*/
 
     }
 
