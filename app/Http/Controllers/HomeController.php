@@ -311,6 +311,12 @@ class HomeController extends Controller { // Контроллер (класс) �
 
         $title = 'Home Page';
         $h1 = '<h1>home page</h1>';
+        $data1 = range(1, 20);
+        $data2 = [
+            'title' => 'Title',
+            'content' => 'Content',
+            'keys' => 'Keywords',
+        ];
 
 
 
@@ -323,7 +329,7 @@ class HomeController extends Controller { // Контроллер (класс) �
 
 
 
-        return view ('home', compact ('title', 'h1'));
+        return view ('home', compact ('title', 'h1', 'data1', 'data2'));
 
     }
 
