@@ -6,11 +6,14 @@
     <meta name="description" content="">
     <title>@section('title')My Site @show</title>
 
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    {{--<!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">--}}
 
     <!-- Custom styles for this template -->
-    <link href="/css/main.css" rel="stylesheet">
+    {{--<link href="/css/styles.css" rel="stylesheet">--}}
+
+    <link href="{{ asset ('css/styles.css') }}" rel="stylesheet"> {{-- Для подключения файла стилей Ларавель предлагает нам специальную функцию-хелпер asset, который уже указывает на корневую папку pulic/, и в ней мы указываем путь к нужному нам файлу asset ('css/styles.css') --}}
+
 </head>
 <body>
 
@@ -63,9 +66,16 @@
 
 @include('layouts.footer') {{-- Директива @include позволяет подключать нужный нам шаблон blade (@include('layouts.footer')) там, где это нам нужно --}}
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+{{--<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>--}}
+
+{{-- Для подключения файла скриптов Ларавель предлагает нам специальную функцию-хелпер asset, который уже указывает на корневую папку pulic/, и в ней мы указываем путь к нужному нам файлу asset ('js/scripts.js') --}}
+<script src="{{ asset ('js/scripts.js') }}"></script>
+
+
+{{-- Как подключать в одном шаблоне скрипты таким образом, чтобы разные скрипты срабатывали при выводе разных страниц? Это можно сделать с помощью секции. Указываем в общем шаблоне вставку секции @yield('scripts'), а в шаблонах на каждой конкретной странице секцию @section('scripts') с вставкой кода скрипта (например, <script> alert(111); </script>) --}}
+@yield('scripts')
 
 </body>
 </html>
