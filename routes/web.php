@@ -217,7 +217,8 @@ Route::post ('/', 'App\Http\Controllers\HomeController@store')->name ('posts.sto
 
 Route::get ('/page/about', 'App\Http\Controllers\PageController@show')->name ('page.about');
 
-
+// Маршрут, при переходе по которому у нас будет отправляться письмо
+Route::get ('/send', 'App\Http\Controllers\ContactController@send');
 
 
 
