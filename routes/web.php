@@ -218,9 +218,10 @@ Route::post ('/', 'App\Http\Controllers\HomeController@store')->name ('posts.sto
 Route::get ('/page/about', 'App\Http\Controllers\PageController@show')->name ('page.about');
 
 // Маршрут, при переходе по которому у нас будет отправляться письмо
-Route::get ('/send', 'App\Http\Controllers\ContactController@send');
+//Route::get ('/send', 'App\Http\Controllers\ContactController@send');
 
-
+// У нас на одной странице будет и форма и отправка - нам потребуется 2 метода для одного маршрута - GET | POST. Для этого используем метод match
+Route::match (['get', 'post'], '/send', 'App\Http\Controllers\ContactController@send');
 
 
 
