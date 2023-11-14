@@ -223,7 +223,9 @@ Route::get ('/page/about', 'App\Http\Controllers\PageController@show')->name ('p
 // У нас на одной странице будет и форма и отправка - нам потребуется 2 метода для одного маршрута - GET | POST. Для этого используем метод match
 Route::match (['get', 'post'], '/send', 'App\Http\Controllers\ContactController@send');
 
-
+// Маршруты под регистрацию пользователя (1 будет выводить форму (метод GET), 2 будет отправлять заполненную форму на controller action (метод POST) и сохранять зарегистрированного пользователя. У нас UserController будет отвечать и за регистрацию и за аутентификацию.
+Route::get ('/register', 'App\Http\Controllers\UserController@create')->name ('register.create'); // Маршрут для выведения формы регистрации
+Route::post ('/register', 'App\Http\Controllers\UserController@store')->name ('register.store');
 
 
 

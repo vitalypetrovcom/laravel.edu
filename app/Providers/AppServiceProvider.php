@@ -29,7 +29,7 @@ class AppServiceProvider extends ServiceProvider
         DB::listen ( function ( $query ) {
 
 //            dump ($query->sql, $query->bindings); // Распечатаем наш запрос sql и привязки bindings
-            dump ($query->sql); // Распечатаем наш запрос sql
+            /*dump ($query->sql);*/ // Распечатаем наш запрос sql
 
         }); // Listening For Query Events - Мы можем отслеживать SQL запросы и "привязки". На вход передаем коллбекфункцию параметром которой будет $query (те наш запрос)
     }

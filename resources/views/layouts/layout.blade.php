@@ -44,6 +44,12 @@
             </a>
 
             <a href="{{ route ('posts.create') }}">Create</a> {{-- Ссылка на страницу формы --}}
+            <a href="{{ route ('register.create') }}">Регистрация</a> {{-- Ссылка на страницу формы регистрации --}}
+
+            @php /* Проверяем, авторизован пользователь или нет (bool: true|false) используя класс Facades\Auth и метод check ИЛИ функцию-хелпер auth и метод check */
+            /*dump(\Illuminate\Support\Facades\Auth::check ())*/
+            dump (auth ()->check ());
+            @endphp
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
