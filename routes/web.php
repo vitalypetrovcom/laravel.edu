@@ -223,23 +223,34 @@ Route::get ('/page/about', 'App\Http\Controllers\PageController@show')->name ('p
 // У нас на одной странице будет и форма и отправка - нам потребуется 2 метода для одного маршрута - GET | POST. Для этого используем метод match
 Route::match (['get', 'post'], '/send', 'App\Http\Controllers\ContactController@send');
 
-// Маршруты под регистрацию пользователя (1 будет выводить форму (метод GET), 2 будет отправлять заполненную форму на controller action (метод POST) и сохранять зарегистрированного пользователя. У нас UserController будет отвечать и за регистрацию и за аутентификацию.
-Route::get ('/register', 'App\Http\Controllers\UserController@create')->name ('register.create'); // Маршрут для выведения формы регистрации
-Route::post ('/register', 'App\Http\Controllers\UserController@store')->name ('register.store');
-
-// Маршрут для формы авторизации (показывает форму)
-Route::get ('/login', 'App\Http\Controllers\UserController@loginForm')->name ('login.create');
-
-// Маршрут аналогичный для формы авторизации, но методом POST, который будет отправлять данные из формы и авторизовывать пользователя (принимает данные из формы)
-Route::post ('/login', 'App\Http\Controllers\UserController@login')->name ('login');
 
 // Маршрут для выхода пользователя (logout - выход пользователя из сессии)
-Route::get ('/logout', 'App\Http\Controllers\UserController@logout')->name ('logout');
-
-// Маршрут для входа в админ-панель
-Route::get ('/admin', 'App\Http\Controllers\Admin\MainController@index');
+Route::get ('/logout', 'App\Http\Controllers\UserController@logout')->name ('logout')->middleware (); // Добавляем посредник 'auth' для обработки маршрута - если пользователь не авторизован - данная страница для него будет недоступна
 
 
+
+// Напишем маршрут для входа в админ-панель с использованием группировки. Назначим нашему маршруту посредника - даем ему ключ alias(псевдоним) 'admin'. Данный маршрут будет обрабатываться посредником 'admin' (посредник - промежуточное звено между запросом пользователя и контроллером со стороны сервера).
+Route::group (['middleware' => 'admin', 'prefix' => 'admin', 'namespace' => 'App\Http\Controllers\Admin'], function () { // Для удобства, добавляем prefix в uri 'prefix' => 'admin' (вместо '/admin/') и namespace в action 'namespace' => 'App\Http\Controllers\Admin' (вместо 'App\Http\Controllers\Admin...') чтобы не писать их для каждой записи наших маршрутов
+    // Маршрут для входа в админ-панель
+    Route::get ('/', 'MainController@index');
+});
+
+
+
+// Как запретить/разрешить конкретные маршруты для авторизованных и НЕавторизованных пользователей? Мы будем использовать посредники. В Ларавель есть возможность группировать маршруты
+Route::group (['middleware' => 'guest'], function () { // Группируем маршруты и всю группу мы поместим под посредник 'guest' (указываем те маршруты, которые мы разрешаем для гостя). Вторым аргументом, при необходимости, мы можем добавить 'prefix'=>'admin', который будет добавляться в uri адрес каждого маршрута ('/admin/register' итд.) ИЛИ можем по аналогии добавить 'namespace'=>'App\Http\Controllers\', который будет добавляться в action каждого маршрута ('App\Http\Controllers\UserController@create' итд.)
+
+    // Маршруты под регистрацию пользователя (1 будет выводить форму (метод GET), 2 будет отправлять заполненную форму на controller action (метод POST) и сохранять зарегистрированного пользователя. У нас UserController будет отвечать и за регистрацию и за аутентификацию.
+    Route::get ('/register', 'App\Http\Controllers\UserController@create')->name ('register.create'); // Маршрут для выведения формы регистрации
+    Route::post ('/register', 'App\Http\Controllers\UserController@store')->name ('register.store');
+
+    // Маршрут для формы авторизации (показывает форму)
+    Route::get ('/login', 'App\Http\Controllers\UserController@loginForm')->name ('login.create');
+
+    // Маршрут аналогичный для формы авторизации, но методом POST, который будет отправлять данные из формы и авторизовывать пользователя (принимает данные из формы)
+    Route::post ('/login', 'App\Http\Controllers\UserController@login')->name ('login');
+
+});
 
 
 

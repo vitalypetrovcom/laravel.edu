@@ -7,8 +7,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class RedirectIfAuthenticated
-{
+class RedirectIfAuthenticated { // Посредник для перенаправления авторизованных пользователей
     /**
      * Handle an incoming request.
      *
@@ -23,7 +22,7 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
+                return redirect()->home (); // Указываем перенаправление на главную страницу
             }
         }
 
