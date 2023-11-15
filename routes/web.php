@@ -227,7 +227,17 @@ Route::match (['get', 'post'], '/send', 'App\Http\Controllers\ContactController@
 Route::get ('/register', 'App\Http\Controllers\UserController@create')->name ('register.create'); // Маршрут для выведения формы регистрации
 Route::post ('/register', 'App\Http\Controllers\UserController@store')->name ('register.store');
 
+// Маршрут для формы авторизации (показывает форму)
+Route::get ('/login', 'App\Http\Controllers\UserController@loginForm')->name ('login.create');
 
+// Маршрут аналогичный для формы авторизации, но методом POST, который будет отправлять данные из формы и авторизовывать пользователя (принимает данные из формы)
+Route::post ('/login', 'App\Http\Controllers\UserController@login')->name ('login');
+
+// Маршрут для выхода пользователя (logout - выход пользователя из сессии)
+Route::get ('/logout', 'App\Http\Controllers\UserController@logout')->name ('logout');
+
+// Маршрут для входа в админ-панель
+Route::get ('/admin', 'App\Http\Controllers\Admin\MainController@index');
 
 
 

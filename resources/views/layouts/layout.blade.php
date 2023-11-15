@@ -43,13 +43,28 @@
                 <strong>Album</strong>
             </a>
 
-            <a href="{{ route ('posts.create') }}">Create</a> {{-- Ссылка на страницу формы --}}
-            <a href="{{ route ('register.create') }}">Регистрация</a> {{-- Ссылка на страницу формы регистрации --}}
+    {{-- // 1 Вариант - Как показать по условию (аутентификация пользователя) ссылки в шапке сайта --}}
+            {{--@if(auth ()->check ())
+                --}}{{-- Пользователь авторизован --}}{{--
+                <a href="#">{{ auth ()->user ()->name }}</a> --}}{{-- Получить имя пользоваетля мы можем используя класс auth и метод user выбирая только параметр name --}}{{--
+                <a href="{{ route ('logout') }}">Logout</a> --}}{{-- Ссылка на выход из сессии --}}{{--
+            @else
+                --}}{{-- Пользователь НЕавторизован --}}{{--
+                <a href="{{ route ('register.create') }}">Регистрация</a> --}}{{-- Ссылка на страницу формы регистрации --}}{{--
+                <a href="{{ route ('login.create') }}">Login</a> --}}{{-- Ссылка на страницу формы авторизации --}}{{--
+            @endif--}}
 
-            @php /* Проверяем, авторизован пользователь или нет (bool: true|false) используя класс Facades\Auth и метод check ИЛИ функцию-хелпер auth и метод check */
-            /*dump(\Illuminate\Support\Facades\Auth::check ())*/
-            dump (auth ()->check ());
-            @endphp
+    {{-- // 2 Вариант - Как показать по условию (аутентификация пользователя) ссылки в шапке сайта. Для этого используем blade директивы @auth (если пользователь авторизован) и @guest (если пользователь НЕ авторизован) (https://laravel.com/docs/8.x/blade) --}}
+            @auth()
+                <a href="#">{{ auth ()->user ()->name }}</a> --}}{{-- Получить имя пользоваетля мы можем используя класс auth и метод user выбирая только параметр name --}}
+                <a href="{{ route ('logout') }}">Logout</a> --}}{{-- Ссылка на выход из сессии --}}
+            @endauth
+
+            @guest()
+                <a href="{{ route ('register.create') }}">Регистрация</a> --}}{{-- Ссылка на страницу формы регистрации --}}
+                <a href="{{ route ('login.create') }}">Login</a> --}}{{-- Ссылка на страницу формы авторизации --}}
+            @endguest
+
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
