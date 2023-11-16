@@ -397,10 +397,7 @@ class HomeController extends Controller { // Контроллер (класс) �
 //        Cache::flush ();
 
 
-
-
-
-        $title = 'Home Page';
+          $title = 'Home Page';
 //        $posts = Post::orderBy('id', 'DESC')->get (); // Получаем все посты из таблицы posts БД, отсортированные по полю 'id' в обратном порядке 'DESC'
 
         return view ('home', compact ('title', 'posts'));

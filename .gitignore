@@ -39,3 +39,5 @@ yarn-error.log
 /resources/front/css/bootstrap-reboot.min.css.map
 /resources/front/js/jquery-3.5.1.slim.js
 /package-lock.json
+
+/routes/
